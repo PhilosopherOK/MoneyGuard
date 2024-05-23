@@ -1,0 +1,84 @@
+body {
+    font-family: 'Gill Sans';
+    background: linear-gradient(45deg, rgb(77, 66, 48), #ffecd4);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-weight: 300;
+    color: #6e6e6e;
+}
+
+.reset-password-container {
+    background-color: white;
+    padding: 40px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: center;
+    width: 300px;
+    border-radius: 8px;
+}
+
+.reset-password-container h2 {
+    color: #6e6e6e;
+    font-weight: 300;
+}
+
+.reset-password-container form {
+    margin-top: 20px;
+}
+
+.input-group{
+    margin-bottom: 20px;
+    text-align: left;
+    font-size: 16px;
+}  
+
+
+.reset-password-container input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    box-sizing: border-box;
+    border: 1px solid #ccc; 
+    border-radius: 4px;
+}
+
+.reset-password-container button {
+    width: 100%;
+    padding: 10px;
+    background-color:  #7a5e3c;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-family: 'Gill Sans';
+
+}
+.reset-password-container button:hover {
+    background-color: #57432b;
+    
+}  
+#emailHelp{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 11px;
+    color: #adabab;
+}
+@media (max-width: 800px) {
+    .reset-password-container{
+        width: 545px;
+        font-size: 20px;
+
+    }
+
+ }
+
+@media (max-width: 480px) {
+    .reset-password-container{
+        width: 100vh;
+        font-size: 25px;
+    }
+ }

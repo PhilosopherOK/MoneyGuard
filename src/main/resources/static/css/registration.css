@@ -1,0 +1,114 @@
+body {
+    font-family: 'Gill Sans';
+    background: linear-gradient(45deg, rgb(77, 66, 48), #ffecd4);
+    background-attachment: fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    height: 100vh;
+    font-weight: 300;
+}
+
+form {
+    border: #cacaca solid 1px;
+    background: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin: 40px 0 40px 0;
+}
+
+form label {
+    display: block;
+    color: #333;
+}
+
+h2{
+    font-weight: 200;
+    font-family: 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif'Gill Sans';
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form input[type="date"],
+form input[type="button"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: 'Gill Sans';
+    font-weight: 300;
+
+}
+
+form input[type="button"] {
+    background-color:  #ada8a2;
+    color: white;
+    border: 2px solid #ada8a2;
+    cursor: default;
+}
+
+form a {
+    color: #7a5e3c;
+    text-decoration: none;
+}
+
+form a:hover {
+    text-decoration: underline;
+}
+.form-explain{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size: 11px;
+    color: #c8c2bc;
+}
+
+p{
+    text-align: center;
+}
+.input-group{
+    margin-bottom: 20px;
+}
+
+#helmet{
+    width: 60px;
+    position: relative;
+    top: 90px;
+    right: 15px;
+}
+
+#shield{
+    width: 60px;
+    position: relative;
+    bottom: 90px;
+    left: 335px;
+}
+
+@media (max-width: 800px) {
+    form{
+        width: 545px;
+        font-size: 20px;
+
+    }
+    .form-explain{
+        font-size: 17px;
+
+    }
+
+ }
+
+@media (max-width: 480px) {
+    form{
+        width: 100vh;
+        font-size: 25px;
+    }
+    .form-explain{
+        font-size: 14px;
+    }
+ }

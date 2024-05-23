@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Change password</title>
+  <link rel="stylesheet" href="/css/changePass.css">
+</head>
+<body>
+<div class="reset-password-container">
+  <h2>Change password</h2>
+  <form action="javascript:void(0);">
+
+    <div class="input-group">
+      <label for="newPassword">New password:</label>
+      <input type="password" id="newPassword" name="newPassword" required>
+      <div id="emailHelp" class="form-explain">the password must contain one uppercase letter, one lowercase letter, one number, one special symbol(!@#$%^&*) and be between 8 and 20 characters long.</div>
+    </div>
+
+    <div class="input-group">
+      <label for="confirmPassword">Confirm password:</label>
+      <input type="password" id="confirmPassword" name="confirmPassword" required>
+    </div>  
+
+    <button id="btn" type="submit">Change password</button>
+  </form>
+</div>
+<script src="/js/changePass.js"></script>
+</body>
+</html>

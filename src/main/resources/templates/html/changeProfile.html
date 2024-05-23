@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>MG</title>
+  <link rel="stylesheet" href="/css/registration.css">
+</head>
+<body>
+  <div id="login-container">
+    <img src="/images/helmet4.png" alt="helmet" id="helmet">
+    <form id="registrationForm">
+      <h2>Profile Settings</h2>
+      <div class="input-group">
+        <label for="inputFirstName">First name:</label>
+        <input type="text" id="inputFirstName" name="inputFirstName" required>
+        <div id="nameHelp" class="form-explain">First and second name must contain only Latin letters</div>
+      </div>
+      <div class="input-group">
+        <label for="inputSecondName">Second name:</label>
+        <input type="text" id="inputSecondName" name="inputSecondName" required>
+      </div>
+      <div class="input-group">
+        <label for="inputDateOfBirth">Birthday:</label>
+        <input type="date" id="inputDateOfBirth" name="inputDateOfBirth" required>
+      </div>
+      <div class="input-group">
+        <label for="inputPhoneNumber">Phone number:</label>
+        <input type="text" id="inputPhoneNumber" name="inputPhoneNumber" required>
+      </div>
+      <div class="input-group">
+        <label for="inputEmail">Email:</label>
+        <input type="email" id="inputEmail" name="inputEmail" required>
+      </div>
+      <div class="input-group">
+        <label for="inputPassword1">Password:</label>
+        <input type="password" id="inputPassword1" name="inputPassword1" required>
+        <div id="emailHelp" class="form-explain">The password must contain at least one uppercase letter, one lowercase letter, one number, one special symbol(!@#$%^&*) and be between 8 and 20 characters long.</div>
+      </div>
+      <div class="input-group">
+        <label for="inputPassword2">Repeat password:</label>
+        <input type="password" id="inputPassword2" name="inputPassword2" required>
+      </div>
+      <input id="btn" type="button" value="Submit">
+      <p><a href="/main/">Cancel</a></p>
+    </form>
+    <img src="/images/shield.png" alt="shield" id="shield">
+  </div>
+  <script src="/js/changeProfile.js" defer></script>
+</body>
+</html>

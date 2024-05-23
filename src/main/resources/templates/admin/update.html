@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Client</title>
+    <link rel="stylesheet" type="text/css" href="/css/admin/update.css">
+</head>
+<body>
+<h1>Update Client</h1>
+<div th:if="${errorMessage}" style="color: red;">
+    <p th:text="${errorMessage}"></p>
+</div>
+<form th:action="@{/admin/updateById/{id}(id=${client.clientId})}" th:object="${client}" method="post">
+    <div>
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" th:field="*{firstName}" required>
+    </div>
+    <div>
+        <label for="secondName">Second Name:</label>
+        <input type="text" id="secondName" th:field="*{secondName}" required>
+    </div>
+    <div>
+        <label for="dateOfBirth">Date of Birth:</label>
+        <input type="date" id="dateOfBirth" th:field="*{dateOfBirth}" required>
+    </div>
+    <div>
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="text" id="phoneNumber" th:field="*{phoneNumber}" required>
+    </div>
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" th:field="*{email}" required>
+    </div>
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" th:field="*{password}">
+    </div>
+    <button type="submit">Update</button>
+</form>
+</body>
+</html>

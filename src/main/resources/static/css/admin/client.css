@@ -1,0 +1,69 @@
+/* client.css */
+
+/* Стили для таблицы */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+table th {
+    background-color: #f2f2f2;
+}
+
+/* Стили для кнопок */
+.pagination {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #26bed2;
+}
+
+.pagination li {
+    float: left;
+}
+
+.pagination li a {
+    display: block;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    background-color: #26bed2;
+}
+
+.pagination li a:hover:not(.active) {
+    background-color: white;
+    color: #26bed2;
+}
+
+.pagination li.disabled {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.pagination li.active {
+    background-color: #4CAF50;
+}
+
+/* Стили для кнопок в формах */
+form button[type="submit"] {
+    display: inline-block;
+    color: white;
+    padding: 8px 16px;
+    margin: 5px 2px; /* Регулируем отступы для расстояния между кнопками */
+    background-color: #26bed2;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+form button[type="submit"]:hover {
+    background-color: white;
+    color: #26bed2;
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Clients List</title>
+    <link rel="stylesheet" type="text/css" href="/css/admin/client.css">
+</head>
+<body>
+<h1>Clients List</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>IBAN</th>
+        <th>First Name</th>
+        <th>Second Name</th>
+        <th>Date of Birth</th>
+        <th>Phone Number</th>
+        <th>Email</th>
+        <th>Enabled</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="client : ${clients.content}">
+        <td th:text="${client.clientId}"></td>
+        <td th:text="${client.IBAN}"></td>
+        <td th:text="${client.firstName}"></td>
+        <td th:text="${client.secondName}"></td>
+        <td th:text="${client.dateOfBirth}"></td>
+        <td th:text="${client.phoneNumber}"></td>
+        <td th:text="${client.email}"></td>
+        <td th:text="${client.enabled}"></td>
+        <td>
+            <!-- Форма для удаления клиента -->
+            <form th:action="@{/admin/deleteById/{id}(id=${client.clientId})}" method="post" style="display:inline;">
+                <button type="submit">Delete</button>
+            </form>
+            <!-- Форма для обновления клиента -->
+            <form th:action="@{/admin/updateById/{id}(id=${client.clientId})}" method="get" style="display:inline;">
+                <button type="submit">Update</button>
+            </form>
+            <!-- Форма для блокировки клиента -->
+            <form th:action="@{/admin/blockClient/{id}(id=${client.clientId})}" method="post" style="display:inline;">
+                <button type="submit">Block</button>
+            </form>
+            <!-- Форма для разблокировки клиента -->
+            <form th:action="@{/admin/unblockClient/{id}(id=${client.clientId})}" method="post" style="display:inline;">
+                <button type="submit">Unblock</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- Кнопка для создания клиента -->
+<form th:action="@{/admin/create}" method="get">
+    <button type="submit">Create</button>
+</form>
+
+<!-- Переключение страниц -->
+<div th:if="${clients.totalPages > 1}">
+    <ul class="pagination">
+        <li th:class="${clients.number == 0} ? 'disabled'">
+            <a th:href="@{/admin/clients/0}">First</a>
+        </li>
+        <li th:class="${clients.number == 0} ? 'disabled'">
+            <a th:href="@{/admin/clients/__${clients.number - 1}__}">Previous</a>
+        </li>
+        <li th:each="pageNum : ${#numbers.sequence(0, clients.totalPages - 1)}"
+            th:class="${pageNum == clients.number} ? 'active'">
+            <a th:href="@{/admin/clients/__${pageNum}__}" th:text="${pageNum + 1}"></a>
+        </li>
+        <li th:class="${clients.number == clients.totalPages - 1} ? 'disabled'">
+            <a th:href="@{/admin/clients/__${clients.number + 1}__}">Next</a>
+        </li>
+        <li th:class="${clients.number == clients.totalPages - 1} ? 'disabled'">
+            <a th:href="@{/admin/clients/__${clients.totalPages - 1}__}">Last</a>
+        </li>
+    </ul>
+</div>
+<a th:href="@{/main/}">main page</a>
+
+</body>
+</html>
