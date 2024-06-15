@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token');
     const csrfToken = document.cookie.replace(/(?:(?:^|.*;\s*)XSRF-TOKEN\s*\=\s*([^;]*).*$)|^.*$/, '$1');
-    let checkPassword = (password)=>/^(?=.*[a-z])(?=.*\d)(?=.*[A-Z])(?=.*[!@#$%^&*]).{10,30}$/.test(password);
+    let checkPassword = (password)=>/^(?=.*[a-z])(?=.*\d)(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,20}$/.test(password);
     let btn = document.querySelector('#btn')
 
     if (!token) {
@@ -14,6 +14,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var newPassword = document.querySelector('#newPassword');
     var confirmPassword = document.querySelector('#confirmPassword');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const closeModalFooterBtn = document.getElementById('closeModalFooterBtn');
+    const modal = document.getElementById('staticBackdrop');
+    const modalBody = document.querySelector('.modal-body');
+    
+    closeModalBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+    closeModalFooterBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
 
     btn.addEventListener('click', function() {
         let errorMessage = '';   
@@ -23,11 +35,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         if (newPassword.value !== confirmPassword.value) {
-            errorMessage += 'Different passwords\n';
+            errorMessage += 'Different passwords.\n';
         }
 
         if (errorMessage !== '') {
-            alert('Validation error:\n' + errorMessage);
+            modal.style.display = 'block';
+            modalBody.textContent = 'Validation error:\n' + errorMessage
         } else {
             console.log('Validation passed.');
             submitForm()
@@ -57,14 +70,27 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => {
             if (response.success) {
                 console.log('Success:', response.message);
-                alert(response.message);
-                window.location.href = '/login';
+                modal.style.display = 'block';
+                modalBody.textContent = response.message
+                closeModalBtn.addEventListener('click', () => {
+                    modal.style.display = 'none';
+                    window.location.href = '/login';
+                });
+                closeModalFooterBtn.addEventListener('click', () => {
+                    modal.style.display = 'none';
+                    window.location.href = '/login';
+
+                });
+
             } else {
                 throw new Error(response.message);
             }
         })
         .catch(error => {
-            alert('Помилка: ' + error.message);
+            console.log('Помилка: ' + error);
+            modal.style.display = 'block';
+            modalBody.textContent = error.message
+
         });
     }
 });

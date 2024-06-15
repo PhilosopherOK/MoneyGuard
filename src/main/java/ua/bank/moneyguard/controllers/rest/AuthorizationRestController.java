@@ -2,10 +2,10 @@ package ua.bank.moneyguard.controllers.rest;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import ua.bank.moneyguard.dtos.mainDTOs.ClientDTO;
 import ua.bank.moneyguard.dtos.authorizationDTOs.EmailDTO;
 import ua.bank.moneyguard.dtos.authorizationDTOs.PasswordDTO;
 import ua.bank.moneyguard.dtos.authorizationDTOs.RegistrationDTO;
-import ua.bank.moneyguard.dtos.mainDTOs.ClientDTO;
 import ua.bank.moneyguard.mappers.Mapper;
 import ua.bank.moneyguard.models.Account;
 import ua.bank.moneyguard.models.Client;

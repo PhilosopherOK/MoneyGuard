@@ -11,7 +11,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import ua.bank.moneyguard.utils.role.UserRole;
+
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -26,16 +31,28 @@ private final UserDetailsServiceImpl userDetailsService;
         return new BCryptPasswordEncoder();
     }
 
+
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(List.of("https://moneyguard-fc72823844dd.herokuapp.com"));
+        configuration.setAllowedMethods(List.of("*"));
+        configuration.setAllowedHeaders(List.of("*"));
+        configuration.setAllowCredentials(true);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .cors()
-                .and()
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf()
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/registration/**", "/login", "/logout", "/registration", "/forgotPass", "/changePass", "/").permitAll()
+                .antMatchers("/api/registration/**", "/login", "/logout", "/registration", "/forgotPass", "/changePass").permitAll()
                 .antMatchers("/css/**", "/js/**", "/images/**").permitAll()
                 .antMatchers("/admin/**").hasRole(UserRole.ADMIN.name())
                 .anyRequest()

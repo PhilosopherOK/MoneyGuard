@@ -7,7 +7,7 @@ window.onload = function () {
     let checkName = (name) => /[a-zA-Z]/g.test(name);
     let checkNumber = (number) => /^\+?[0-9]{10,12}$/.test(number);
     let checkEmail = (email) => /^([a-z\d\._-]+)@([a-z\d_-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/i.test(email);
-    let checkPassword = (password) => /^(?=.*[a-z])(?=.*\d)(?=.*[A-Z])(?=.*[!@#$%^&*]).{10,30}$/.test(password);
+    let checkPassword = (password) => /^(?=.*[a-z])(?=.*\d)(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,20}$/.test(password);
     
     let btn = document.querySelector('#btn');
     let inputFirstName = document.querySelector('#inputFirstName');
@@ -52,37 +52,51 @@ window.onload = function () {
         }
     }    
 
+    let closeModalBtn = document.getElementById('closeModalBtn');
+    let closeModalFooterBtn = document.getElementById('closeModalFooterBtn');
+    let modal = document.getElementById('staticBackdrop');
+    let modalBody = document.querySelector('.modal-body');
+
+    closeModalBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+    closeModalFooterBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
     btn.addEventListener('click', function() {
         let errorMessage = '';   
 
         if (!checkName(inputFirstName.value)) {
-            errorMessage += 'Invalid first name\n';
+            errorMessage += 'Invalid first name.\n';
         }
         
         if (!checkName(inputSecondName.value)) {
-            errorMessage += 'Invalid second name\n';
+            errorMessage += 'Invalid second name.\n';
         }
 
         if (!checkEmail(inputEmail.value)) {
-            errorMessage += 'Invalid email\n';
+            errorMessage += 'Invalid email.\n';
         }
         
         if (!checkNumber(inputPhone.value)) {
-            errorMessage += 'Invalid phone number\n';
+            errorMessage += 'Invalid phone number.\n';
         }
 
         if (inputPassword1.value !== '' || inputPassword2.value !== '') {
             if (!checkPassword(inputPassword1.value)) {
-                errorMessage += 'Invalid password\n';
+                errorMessage += 'Invalid password.\n';
             }
 
             if (inputPassword1.value !== inputPassword2.value) {
-                errorMessage += 'Different passwords\n';
+                errorMessage += 'Different passwords.\n';
             }
         }
 
         if (errorMessage !== '') {
-            alert('Validation error:\n' + errorMessage);
+            modal.style.display = 'block';
+            modalBody.textContent = 'Validation error:\n' + errorMessage
+
         } else {
             console.log('Validation passed.');
             submitForm();
@@ -119,16 +133,26 @@ window.onload = function () {
             .then(data => {
                 if (data.success === true) {
                     console.log('Success:', data.message);
-                    alert(data.message);
-                    window.location.href = '/main/';
+                    modal.style.display = 'block';
+                    modalBody.textContent = data.message
+                    closeModalBtn.addEventListener('click', () => {
+                        modal.style.display = 'none';
+                        window.location.href = '/main/';
+                    });
+                    closeModalFooterBtn.addEventListener('click', () => {
+                        modal.style.display = 'none';
+                        window.location.href = '/main/';
+                    });
+
                 } else {
                     throw new Error(data.message);
                 }
             })
             .catch((error) => {
                 console.error('Error:', error);
-                alert('Error in changing: ' + error.message);
-            });
+                modal.style.display = 'block';
+                modalBody.textContent = error.message
+        });
     }
 
     fetch(urlGetProfileRequest, {

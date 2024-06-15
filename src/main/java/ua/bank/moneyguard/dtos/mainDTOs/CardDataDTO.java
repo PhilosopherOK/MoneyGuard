@@ -13,6 +13,6 @@ public class CardDataDTO {
     private String cardNumber;
     private LocalDate validity;
     private Integer cvv;
-    private Long amountOfMoney;
+    private Double amountOfMoney;
     private String ownerName;
 }

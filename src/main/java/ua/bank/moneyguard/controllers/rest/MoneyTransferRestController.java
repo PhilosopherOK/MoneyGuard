@@ -1,5 +1,6 @@
 package ua.bank.moneyguard.controllers.rest;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.web.bind.annotation.*;
 import ua.bank.moneyguard.dtos.moneyTransferDTOs.CurrencyExchangeDTO;

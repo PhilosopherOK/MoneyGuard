@@ -131,8 +131,11 @@ public class MainCardService implements ServiceExample<MainCard> {
         MainCard mainCard = account.getCardIds().get(0);
         String beautifulCardNumber = mainCard.getCardNumber().replaceAll("(.{4})", "$1 ");
         beautifulCardNumber = beautifulCardNumber.trim();
+        Double amountOfMoney = account.getAmountOfMoney();
+        String beautifulAmountOfMoney = amountOfMoney.toString().replaceAll("(\\d+\\.\\d{2})(\\d+)?", "$1");
+        amountOfMoney = Double.parseDouble(beautifulAmountOfMoney);
         return new CardDataDTO(beautifulCardNumber,
                 mainCard.getValidity(), mainCard.getCvv(),
-                account.getAmountOfMoney().longValue(), mainCard.getOwnerName());
+                amountOfMoney, mainCard.getOwnerName());
     }
 }

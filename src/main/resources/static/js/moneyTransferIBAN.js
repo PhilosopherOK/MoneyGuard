@@ -34,38 +34,43 @@ window.onload =function(){
         }
     })
     .catch(error => {
-        alert('Помилка: ' + error.message);
+        console.error('Помилка:', error);
     });
     
     document.getElementById('currencyForm').addEventListener('submit', function(e) {
-        e.preventDefault()
-          
+        e.preventDefault();
+        
         fetch(urlPostIBANTransferRequest, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-XSRF-TOKEN': csrfToken
-        },
-        body: JSON.stringify({
-            "currencyName": myCurrencyList.value,
-            "toIBAN": toIBAN.value,
-            "transferAmount": transferAmount.value
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-XSRF-TOKEN': csrfToken
+            },
+            body: JSON.stringify({
+                "currencyName": myCurrencyList.value,
+                "toIBAN": toIBAN.value,
+                "transferAmount": transferAmount.value
+            })
         })
-    })  
-
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(response => {
-        console.log('Успішна відповідь:', response);
-        alert(response.message);
-    })
-    .catch(error => {
-        console.error('Помилка:', error);
-        alert('Помилка: ' + error.message);
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(response => {
+            console.log('Успішна відповідь:', response);
+            const modalBody = document.querySelector('#staticBackdrop .modal-body p');
+            modalBody.textContent = response.message;
+            const myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+            myModal.show();
+        })
+        .catch(error => {
+            console.error('Failed to load data:', error);
+            const modalBody = document.querySelector('#staticBackdrop .modal-body p');
+            modalBody.textContent = 'Network error. Try again.'
+            const myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+            myModal.show();
+        });
     });
-});
-}
+    }

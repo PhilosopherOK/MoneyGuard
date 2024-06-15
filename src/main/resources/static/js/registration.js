@@ -2,7 +2,7 @@ window.onload = function () {
     let checkName = (name)=>/[a-zA-Z]/g.test(name);
     let checkNumber = (number)=>/^\+?[0-9]{10,12}$/.test(number);
     let checkEmail = (email)=>/^([a-z\d\._-]+)@([a-z\d_-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/i.test(email);
-    let checkPassword = (password)=>/^(?=.*[a-z])(?=.*\d)(?=.*[A-Z])(?=.*[!@#$%^&*]).{10,30}$/.test(password);
+    let checkPassword = (password)=>/^(?=.*[a-z])(?=.*\d)(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,20}$/.test(password);
     
     let btn = document.querySelector('#btn')
     let inputFirstName = document.querySelector('#inputFirstName')
@@ -46,35 +46,50 @@ window.onload = function () {
         }
     }    
 
+    let closeModalBtn = document.getElementById('closeModalBtn');
+    let closeModalFooterBtn = document.getElementById('closeModalFooterBtn');
+    let modal = document.getElementById('staticBackdrop');
+    let modalBody = document.querySelector('.modal-body');
+
+    closeModalBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+    closeModalFooterBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+
     btn.addEventListener('click', function() {
         let errorMessage = '';   
 
         if (!checkName(inputFirstName.value)) {
-            errorMessage += 'Invalid first name\n';
+            errorMessage += 'invalid first name,\n';
         }
         
         if (!checkName(inputSecondName.value)) {
-            errorMessage += 'Invalid second name\n';
+            errorMessage += 'invalid second name,\n';
         }
 
         if (!checkEmail(inputEmail.value)) {
-            errorMessage += 'Invalid email\n';
+            errorMessage += 'invalid email,\n';
         }
         
         if (!checkNumber(inputPhone.value)) {
-            errorMessage += 'Invalid phone number\n';
+            errorMessage += 'invalid phone number,\n';
         }
 
         if (!checkPassword(inputPassword1.value)) {
-            errorMessage += 'Invalid password\n';
+            errorMessage += 'invalid password,\n';
         }
 
         if (inputPassword1.value !== inputPassword2.value) {
-            errorMessage += 'Different passwords\n';
+            errorMessage += 'Different passwords,\n';
         }
 
         if (errorMessage !== '') {
-            alert('Validation error:\n' + errorMessage);
+            modal.style.display = 'block';
+            modalBody.textContent = 'Validation error:\n' + errorMessage
+
         } else {
             console.log('Validation passed.');
             submitForm()
@@ -111,17 +126,29 @@ window.onload = function () {
                 return response.json();
             })
             .then(data => {
-                if (data.success) {
+                if (data.success === true) {
                     console.log('Success:', data.message);
-                    alert(data.message);
-                    window.location.href = '/login';
+                    modal.style.display = 'block';
+                    modalBody.textContent = data.message
+                    closeModalBtn.addEventListener('click', () => {
+                        modal.style.display = 'none';
+                        window.location.href = '/login';
+                    });
+                    closeModalFooterBtn.addEventListener('click', () => {
+                        modal.style.display = 'none';
+                        window.location.href = '/login';
+
+                    });
+                
                 } else {
-                    throw new Error(data.message);
+                    modal.style.display = 'block';
+                    modalBody.textContent = data.message
                 }
             })
             .catch((error) => {
                 console.error('Error:', error);
-                alert('Error in registration: ' + error.message);
+                modal.style.display = 'block';
+                modalBody.textContent = error.message
             });
     }
-}
+}  

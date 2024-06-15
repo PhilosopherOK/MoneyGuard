@@ -36,6 +36,7 @@ public class RegistrationService {
     private final ClientService clientService;
 
     private String linkToSite = "https://moneyguard-fc72823844dd.herokuapp.com";
+//    private String linkToSite = "http://localhost:8080";
 
 
     @Transactional
